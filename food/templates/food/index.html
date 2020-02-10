@@ -1,0 +1,122 @@
+{%extends 'base.html' %}
+{% load static %}
+{% block content%}
+<section class="banner-area">
+  <div class="container">
+      <div class="row fullscreen align-items-center justify-content-start">
+          <div class="col-lg-12">
+              <div class=" owl-carousel">
+                  <!-- single-slide -->
+                  <div class=" align-items-center d-flex">
+                      <div class="col-lg-5 col-md-6">
+                          <div class="banner-content">
+                              <h1>Nihari</h1>
+                              <p>As you enter Old Delhi and walk into the serpentine lanes, you can’t help but be drawn to the aroma of one of the region’s signature delicacies, the Nihari. This rich, spicy broth of slow cooked meat is served alongside hot tandoori rotis or preferably khameeri rotis. The dish was a favourite within the royal families, who used to feast on it in the mornings.</p>
+      
+                          </div>
+                      </div>
+                      <div class="col-lg-7">
+                          <div class="banner-img">
+                              <img class="img-fluid" src=" {% static 'img/banner/banner-img.png' %} " alt="" >
+                          </div>
+                      </div>
+                  </div>
+                  <!-- single-slide -->
+                  <div class="row single-slide">
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+<!-- End banner Area -->
+
+<br>
+<br>
+<section class="owl-carousel">
+  <!-- single product slide -->
+  <section class="features-area section_gap">
+		<div class="container">
+			<div class="row features-inner">
+				<!-- single features -->
+				<div class="col-lg-3 col-md-6 col-sm-6">
+					<div class="single-features">
+						<div class="f-icon">
+							<img src=" {% static 'img/features/f-icon1.png' %} " alt="">
+						</div>
+						<h6>Free Delivery</h6>
+						<p>Free Shipping on all order</p>
+					</div>
+				</div>
+				<!-- single features -->
+				<div class="col-lg-3 col-md-6 col-sm-6">
+					<div class="single-features">
+						<div class="f-icon">
+							<img src=" {% static 'img/features/f-icon2.png' %} " alt="">
+						</div>
+						<h6>Return Policy</h6>
+						<p>Free Shipping on all order</p>
+					</div>
+				</div>
+				<!-- single features -->
+				<div class="col-lg-3 col-md-6 col-sm-6">
+					<div class="single-features">
+						<div class="f-icon">
+							<img src=" {% static 'img/features/f-icon3.png' %} " alt="">
+						</div>
+						<h6>24/7 Support</h6>
+						<p>Free Shipping on all order</p>
+					</div>
+				</div>
+				<!-- single features -->
+				<div class="col-lg-3 col-md-6 col-sm-6">
+					<div class="single-features">
+						<div class="f-icon">
+							<img src=" {% static 'img/features/f-icon4.png' %} " alt="">
+						</div>
+						<h6>Secure Payment</h6>
+						<p>Free Shipping on all order</p>
+					</div>
+				</div>
+			</div>
+		</div>
+  </section>
+  <div class="row justify-content-center">
+    <div class="col-lg-6 text-center">
+      <div class="section-title">
+        <h1>Foods</h1>
+        <p>Here you can find all your favourite foods and to get it just add it to the basket and order.It's simple,fast and the food here is tasty.</p>
+      </div>
+    </div>
+  </div>
+  <div class="single-product-slider">
+      <div class="container">
+          <div class="row">
+              <!-- single product -->
+              {%for f in food%}
+              <div class="col-lg-3 col-md-6">
+                  <div class="single-product">
+                      <img class="img-fluid" src="{{f.photo.url}}" alt="" style="width: 100% ;height:190px; object-fit: cover;">
+                      <div class="product-details">
+                          <h6>{{f.name}}</h6>
+                          <div class="price">
+                            <p> {{f.description|truncatechars:15}}</p>
+                              <h6>Rs.{{f.price}}</h6>
+                          </div>
+                          <div class="prd-bottom">
+                                <form method="POST" action="{% url 'customer:order' f.pk%}">
+                                  {% csrf_token%} {{orderForm.as_p}}
+                                  <button type="submit" class="col-lg-12 col-md-6 gray_btn">Order</button>
+                                </form>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              {% endfor %}
+                
+          </div>
+      </div>
+  </div>
+</section>
+
+{%endblock content%}
