@@ -6,24 +6,18 @@ import json
 # Create your views here.
 
 
-def api_data(request):  # Get all Food data
-    food = Food.objects.all()
-    dict_value = {
-        "food": list(food.values("name", "price", "description"))
-    }
-    return JsonResponse(dict_value)
-
-
-def api_specific_data(request, pk=None):  # Get specific food data
-    food = Food.objects.get(pk=pk)
-
-    return JsonResponse({"name": food.name, "price": food.price, "description": food.description})
-
-
 @csrf_exempt
-def api_add_data(request):  # Add new food data
-    f = Food()
-    if request.method == "POST":
+def api_data(request):
+    # Get all Food data
+    if request.method == 'GET':
+        food = Food.objects.all()
+        dict_value = {
+            "food": list(food.values("name", "price", "description"))
+        }
+        return JsonResponse(dict_value)
+        # Add new Food data
+    elif request.method == 'POST':
+        f = Food()
         decoded_data = request.body.decode('utf-8')
         food_data = json.loads(decoded_data)
         f.name = food_data['name']
@@ -37,9 +31,13 @@ def api_add_data(request):  # Add new food data
 
 
 @csrf_exempt
-def api_update_data(request, pk=None):  # update food data
+def api_edit_data(request, pk=None):
     food = Food.objects.get(pk=pk)
-    if request.method == "PUT":
+    # Get specific food data
+    if request.method == 'GET':
+        return JsonResponse({"name": food.name, "price": food.price, "description": food.description})
+    # Update specific food data
+    elif request.method == 'PUT':
         decoded_data = request.body.decode('utf-8')
         food_data = json.loads(decoded_data)
         food.name = food_data['name']
@@ -47,18 +45,10 @@ def api_update_data(request, pk=None):  # update food data
         food.description = food_data['description']
         food.save()
         return JsonResponse({"message": "Update Completed"})
-
-    else:
-        return JsonResponse({"name": food.name, "price": food.price, "description": food.description})
-
-
-@csrf_exempt
-def api_delete_data(request, pk=None):  # delete food data
-    food = Food.objects.get(pk=pk)
-    if request.method == "DELETE":
+    # Delete specific food data
+    elif request.method == 'DELETE':
         food.delete()
         return JsonResponse({"message": "Delete Completed"})
-
     else:
         return JsonResponse({"name": food.name, "price": food.price, "description": food.description})
 
