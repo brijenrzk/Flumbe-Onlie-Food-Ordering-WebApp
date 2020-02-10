@@ -1,0 +1,115 @@
+{%extends 'base.html' %} {% load food_extras %}{% block content%}
+<section class="banner-area organic-breadcrumb">
+  <div class="container">
+      <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+          <div class="col-first">
+              <h1>Shopping Cart</h1>
+              <nav class="d-flex align-items-center">
+                  <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
+                  <a href="category.html">Cart</a>
+              </nav>
+          </div>
+      </div>
+  </div>
+</section>
+
+
+<section class="cart_area">
+  <div class="container">
+      <div class="cart_inner">
+          <div class="table-responsive">
+              <table class="table">
+                  <thead>
+                      <tr>
+                          <th scope="col">Product</th>
+                          <th scope="col">Price</th>
+                          <th scope="col">Quantity</th>
+                          <th scope="col">Total</th>
+                          <th scope="col">Delete Iteam</th>
+                      </tr>
+                  </thead>
+                  {%if ord%}
+                  <tbody>
+                    
+                    {%for o in ord%}
+                      <tr>
+                          <td>
+                              <div class="media">
+                                  <div class="d-flex">
+                                      <img src="{{o.food_id.photo.url}}" style="width: 50px"> 
+                                  </div>
+                                  <div class="media-body">
+                                      <p>{{o.food_id.name}}</p>
+                                  </div>
+                              </div>
+                          </td>
+                          <td>
+                              <h5>{{o.food_id.price}}</h5>
+                          </td>
+                          <td>
+                            {{o.quantity}}
+                          </td>
+                          <td>
+                              <h5>{{o.quantity| multiply:o.food_id.price }}</h5>
+                          </td>
+                          <td>
+                            <form method="DELETE" action="{% url 'customer:delete_food' o.pk%}">
+                              {%csrf_token%}<button type="submit" class="gray_btn" style="cursor:pointer;color:red;">
+                                X
+                              </button>
+                            </form>
+                            
+                        </td>
+                        
+                      </tr>
+                      {%endfor%}
+                      
+                      <tr>
+                          <td>
+
+                          </td>
+                          <td>
+
+                          </td>
+                          <td>
+                              <h5>Subtotal</h5>
+                          </td>
+                          <td>
+                              <h5>{{total}}</h5>
+                          </td>
+                      </tr>
+      
+                      <tr class="out_button_area">
+                          <td>
+
+                          </td>
+                          <td>
+
+                          </td>
+                          <td>
+
+                          </td>
+                          <td>
+                              <div class="checkout_btn_inner d-flex align-items-center">
+                                  <a class="gray_btn" href="{%url 'food:all_foods'%}">Continue Shopping</a>
+                                  <form method="POST">
+                                    {% csrf_token %}
+                                    <button class="primary-btn" type="submit">Proceed</button>
+                                  </form>
+                              </div>
+                          </td>
+                      </tr>
+                  </tbody>
+                  {%else%}
+<h1>Nothing in cart</h1>
+{%if msg%}
+<h1 class="primary-btn">Order sucessful</h1>
+{%endif%}
+{%endif%}
+              </table>
+          </div>
+      </div>
+  </div>
+</section>
+
+{%endblock content%}
