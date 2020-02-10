@@ -1,0 +1,41 @@
+{%extends 'base.html' %}{% block content%}
+<h1>Category</h1>
+<hr />
+<a href="{%url 'account:add_category'%}">Add Category</a>
+<hr />
+<h2>List Of Category</h2>
+{%if cat%}
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Update</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {%for c in cat%}
+    <tr>
+      <td>{{c.name}}</td>
+      <td><a href="{%url 'account:update_category' c.pk%}">Update</a></td>
+      <td>
+        <form method="POST" action="{% url 'account:delete_category' c.pk%}">
+          {%csrf_token%}<button type="submit" class="btn btn-primary red">
+            Delete
+          </button>
+        </form>
+      </td>
+    </tr>
+    {%endfor%}
+  </tbody>
+</table>
+{%else%}
+<div class="container">
+  <div class="row">
+    <div class="card-title">
+      <h1 class="card-body">No Category !</h1>
+    </div>
+  </div>
+</div>
+{%endif%} {%endblock%}

@@ -1,0 +1,8 @@
+<body>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %} {% if error %}
+    <h5 style="color: red;">{{error}}</h5>
+    {% endif %} {{form.as_p}}
+    <button type="submit" class="btn btn-success">Add Food</button>
+  </form>
+</body>

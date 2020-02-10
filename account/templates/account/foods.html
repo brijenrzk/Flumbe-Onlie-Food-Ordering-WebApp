@@ -1,0 +1,54 @@
+{%extends 'base.html' %}{% block content%}
+<h1>Food</h1>
+<hr />
+<a href="{%url 'account:add_food'%}">Add Food</a>
+<hr />
+<h2>List Of Foods</h2>
+{%if food%}
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Description</th>
+      <th>Category</th>
+      <th>Photo</th>
+      <th>Update</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {%for f in food%}
+    <tr>
+      <td>{{f.name}}</td>
+      <td>{{f.price}}</td>
+      <td>{{f.description}}</td>
+      <td>{{f.cat_id.name}}</td>
+      <td>
+        {%if f.photo%}
+        <img src="{{f.photo.url}}" height="30" width="30" />
+        {%else%} None {%endif%}
+      </td>
+
+      <td><a href="{%url 'account:update_food' f.pk%}">Update</a></td>
+      <td>
+        <form method="POST" action="{% url 'account:delete_food' f.pk%}">
+          {%csrf_token%}<button type="submit" class="btn btn-primary red">
+            Delete
+          </button>
+        </form>
+      </td>
+    </tr>
+    {%endfor%}
+  </tbody>
+</table>
+{%else%}
+<div class="container">
+  <div class="row">
+    <div class="card-title">
+      <h1 class="card-body">No Foods !</h1>
+    </div>
+  </div>
+</div>
+{%endif%} {%endblock%}

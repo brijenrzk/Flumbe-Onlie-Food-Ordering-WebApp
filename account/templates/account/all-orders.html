@@ -1,0 +1,33 @@
+{%extends 'base.html' %}{% block content%}
+<h2>List Of Orders</h2>
+{%if ord%}
+<table class="table">
+  <thead>
+    <tr>
+      <th>Customer Name</th>
+      <th>Food</th>
+      <th>Quantity</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {%for o in ord%}
+    <tr>
+      <td>{{o.cus_id.user.first_name}} {{o.cus_id.user.last_name}}</td>
+      <td>{{o.food_id.name}}</td>
+      <td>{{o.quantity}}</td>
+      <td>{{o.date_order}}</td>
+    </tr>
+    {%endfor%}
+  </tbody>
+</table>
+{%else%}
+<div class="container">
+  <div class="row">
+    <div class="card-title">
+      <h1 class="card-body">No Orders !</h1>
+    </div>
+  </div>
+</div>
+{%endif%} {%endblock%}
