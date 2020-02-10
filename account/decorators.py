@@ -1,6 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect
 
+# Make pages view by admin only
+
 
 def admin_only(view_func):
     def wrapper_func(request, *args, **kwargs):
@@ -10,6 +12,8 @@ def admin_only(view_func):
             return redirect('food:index')
 
     return wrapper_func
+
+# Make pages view by user only
 
 
 def user_only(view_func):

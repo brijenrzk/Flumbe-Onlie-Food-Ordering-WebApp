@@ -18,21 +18,21 @@ class DataTest(TestCase):
         Order.objects.create(cus_id_id=self.customer.id,
                              food_id_id=self.food.id, quantity=4)
 
-    # def testFood(self):
-    #     t = Food.objects.get(name="Momo")
-    #     self.assertEqual(t.name, 'Momo')
+    def testFood(self):
+        t = Food.objects.get(name="Momo")
+        self.assertEqual(t.name, 'Momo')
 
-    # def testuser(self):
-    #     c = Customer.objects.get(user_id=self.user.id)
-    #     self.assertEqual(c.address, 'ktm')
+    def testuser(self):
+        c = Customer.objects.get(user_id=self.user.id)
+        self.assertEqual(c.address, 'ktm')
 
-    # def testCategory(self):
-    #     cat = Category.objects.get(name="Dessert")
-    #     self.assertEqual(cat.name, 'Dessert')
+    def testCategory(self):
+        cat = Category.objects.get(name="Dessert")
+        self.assertEqual(cat.name, 'Dessert')
 
-    # def testCartItem(self):
-    #     item = CartItem.objects.get(cus_id_id=self.customer.id)
-    #     self.assertEqual(item.quantity, 2)
+    def testCartItem(self):
+        item = CartItem.objects.get(cus_id_id=self.customer.id)
+        self.assertEqual(item.quantity, 2)
 
     def testOrder(self):
         orde = Order.objects.get(cus_id_id=self.customer.id)

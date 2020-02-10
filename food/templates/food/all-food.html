@@ -25,11 +25,13 @@
               {%for f in food%}
               <div class="col-lg-3 col-md-6">
                 <div class="single-product">
+                  {%if f.photo%}
                     <img class="img-fluid" src="{{f.photo.url}}" alt="" style="width: 100% ;height:190px; object-fit: cover;">
+                    {%endif%}
                     <div class="product-details">
                         <h6>{{f.name}}</h6>
                         <div class="price">
-                          <p> {{f.description|truncatechars:15}}</p>
+                          <p> {{f.description|truncatechars:30}}</p>
                             <h6>Rs.{{f.price}}</h6>
                         </div>
                         <div class="prd-bottom">

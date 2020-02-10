@@ -18,7 +18,7 @@ from account.decorators import user_only
 
 @login_required(login_url='account:login')
 @user_only
-def edit_profile(request):
+def edit_profile(request):  # Edit Profile Method
     if request.method == 'POST':
         form = UpdateForm(request.POST, request.FILES, instance=request.user, initial={
                           'address': request.user.customer.address, 'contact': request.user.customer.contact, 'photo': request.user.customer.photo})
@@ -49,15 +49,15 @@ def edit_profile(request):
 
 @login_required(login_url='account:login')
 @user_only
-def profile(request):
+def profile(request):  # Display User Profile method
     return render(request, 'customer/profile.html', {"usr": User.objects.get(pk=request.user.id)})
 
 
 @login_required(login_url='account:login')
 @user_only
-def order(request, pk=None):
+def order(request, pk=None):  # Add To Cart method
     if request.method == 'POST':
-        formOrder = OrderForm(data=request.POST,initial={'quantity':1})
+        formOrder = OrderForm(data=request.POST, initial={'quantity': 1})
         if formOrder.is_valid():
             u = Customer.objects.get(user_id=request.user.id)
             q = formOrder.cleaned_data['quantity']
@@ -71,7 +71,7 @@ def order(request, pk=None):
 
 @login_required(login_url='account:login')
 @user_only
-def list_order(request):
+def list_order(request):  # list all the current user Order method
     u = Customer.objects.get(user_id=request.user.id)
     o = CartItem.objects.filter(cus_id_id=u.id)
     total = 0
@@ -96,7 +96,7 @@ def list_order(request):
 
 @login_required(login_url='account:login')
 @user_only
-def delete_food(request, pk=None):
+def delete_food(request, pk=None):  # Delete food from Cart method
     c = CartItem(id=pk)
     c.delete()
     return redirect(reverse('customer:list_order'))
@@ -104,7 +104,7 @@ def delete_food(request, pk=None):
 
 @login_required(login_url='account:login')
 @user_only
-def order_history(request):
+def order_history(request):  # Display and download Order History method
     u = Customer.objects.get(user_id=request.user.id)
     f = open("static/order/order-history.txt", "w+")
     orde = Order.objects.filter(cus_id_id=u.id)
@@ -117,10 +117,5 @@ def order_history(request):
         f.write("Date : "+str(o.date_order)+"\n")
         f.write("---------------------------------------\n")
     f.close()
-    f = open("static/order/order-history.txt", "r")
-
-    if f.mode == 'r':
-        contents = f.read()
-        print(contents)
 
     return render(request, 'customer/order-history.html', {"ord": orde})

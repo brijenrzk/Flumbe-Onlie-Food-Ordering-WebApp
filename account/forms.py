@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from food.models import Customer, Category, Food
 
 
-class RegisterForm(forms.ModelForm):
+class RegisterForm(forms.ModelForm):  # Register form for UserModel
     password = forms.CharField(widget=forms.PasswordInput())
 
     class Meta:
@@ -12,21 +12,21 @@ class RegisterForm(forms.ModelForm):
                   'email', 'password')
 
 
-class ProfileForm(forms.ModelForm):
+class ProfileForm(forms.ModelForm):  # Register form CustomerModel
 
     class Meta:
         model = Customer
         fields = ('address', 'contact')
 
 
-class CategoryForm(forms.ModelForm):
+class CategoryForm(forms.ModelForm):  # Category form for adding category
 
     class Meta:
         model = Category
         fields = ('name',)
 
 
-class FoodForm(forms.Form):
+class FoodForm(forms.Form):   # Food form for adding food
     name = forms.CharField(max_length=35)
     price = forms.IntegerField()
     description = forms.CharField(

@@ -1,18 +1,42 @@
 Food : Chicken Momo
-Price : 120.0
-Quantity : 1
-Sub Total :120.0
-Date : 2020-02-10 09:07:43.132178+00:00
+Price : 122.0
+Quantity : 11
+Sub Total :1342.0
+Date : 2020-02-06 07:02:36.655108+00:00
+---------------------------------------
+Food : Chicken Momo
+Price : 122.0
+Quantity : 3
+Sub Total :366.0
+Date : 2020-02-06 07:47:47.193483+00:00
+---------------------------------------
+Food : Chicken Momo
+Price : 122.0
+Quantity : 5
+Sub Total :610.0
+Date : 2020-02-06 08:06:32.421988+00:00
+---------------------------------------
+Food : Chicken Momo
+Price : 122.0
+Quantity : 4
+Sub Total :488.0
+Date : 2020-02-07 06:22:00.912426+00:00
+---------------------------------------
+Food : Chicken Momo
+Price : 122.0
+Quantity : 4
+Sub Total :488.0
+Date : 2020-02-10 03:20:53.900148+00:00
+---------------------------------------
+Food : Chicken Momo
+Price : 122.0
+Quantity : 3
+Sub Total :366.0
+Date : 2020-02-10 16:17:22.388996+00:00
 ---------------------------------------
 Food : Pepperoni Pizza
-Price : 450.0
-Quantity : 1
-Sub Total :450.0
-Date : 2020-02-10 09:07:43.136675+00:00
----------------------------------------
-Food : Pepperoni Pizza
-Price : 450.0
-Quantity : 1
-Sub Total :450.0
-Date : 2020-02-10 09:07:43.138655+00:00
+Price : 420.0
+Quantity : 2
+Sub Total :840.0
+Date : 2020-02-10 16:17:22.392159+00:00
 ---------------------------------------

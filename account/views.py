@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
-def register(request):
+def register(request):  # Register User Method
     if request.method == 'POST':
         formRegister = RegisterForm(data=request.POST)
         formProfile = ProfileForm(
@@ -22,21 +22,17 @@ def register(request):
             user = formRegister.save()
             user.set_password(user.password)
             user.save()
-            # us = User.objects.get(pk=user.id)
-            # customer = Customer()
             profile = formProfile.save(commit=False)
             profile.user = User.objects.get(pk=user.id)
-            # customer.user_id = us
-            # print(user.id)
             profile.save()
             username = formRegister.cleaned_data.get('username')
             password = formRegister.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect('customer:profile')
+            return redirect('food:index')
         else:
 
-            return render(request, "account/register.html", {'error': "Given Username is Already Taken.Please Try Another."})
+            return render(request, "account/register.html", {'error': "Given Username is Already Taken.Please Try Another.", "formRegister": formRegister, "formProfile": formProfile})
 
     else:
         formRegister = RegisterForm()
@@ -44,7 +40,7 @@ def register(request):
         return render(request, "account/register.html", {"formRegister": formRegister, "formProfile": formProfile})
 
 
-def customerLogin(request):
+def customerLogin(request):  # Login User/Admin Method
     if request.method == 'POST':
         usernam = request.POST['username']
         passwor = request.POST['password']
@@ -59,14 +55,14 @@ def customerLogin(request):
         return render(request, "account/login.html")
 
 
-def customerLogout(request):
+def customerLogout(request):  # Logout Method
     logout(request)
     return redirect('account:home')
 
 
 @login_required(login_url='account:login')
 @admin_only
-def home(request):
+def home(request):  # Admin Dashboard method
     f = Food.objects.all()
     o = Order.objects.all()
     c = Customer.objects.all()
@@ -80,7 +76,7 @@ def home(request):
 
 @login_required(login_url='account:login')
 @admin_only
-def category(request):
+def category(request):  # Admin view category method
     f = Food.objects.all()
     o = Order.objects.all()
     c = Customer.objects.all()
@@ -94,7 +90,7 @@ def category(request):
 
 @login_required(login_url='account:login')
 @admin_only
-def delete_category(request, pk=None):
+def delete_category(request, pk=None):  # Admin delete category method
     cat = Category.objects.get(pk=pk)
     cat.delete()
     return redirect('account:category')
@@ -102,7 +98,7 @@ def delete_category(request, pk=None):
 
 @login_required(login_url='account:login')
 @admin_only
-def update_category(request, pk=None):
+def update_category(request, pk=None):  # Admin update category method
     cat = Category.objects.get(pk=pk)
     if request.method == 'POST':
         form = CategoryForm(data=request.POST, initial={'name': cat.name})
@@ -122,7 +118,7 @@ def update_category(request, pk=None):
 
 @login_required(login_url='account:login')
 @admin_only
-def add_category(request):
+def add_category(request):  # Admin add category method
     if request.method == 'POST':
         form = CategoryForm(data=request.POST)
         if form.is_valid():
@@ -140,7 +136,7 @@ def add_category(request):
 
 @login_required(login_url='account:login')
 @admin_only
-def food(request):
+def food(request):  # Admin view food method
     f = Food.objects.all()
     o = Order.objects.all()
     c = Customer.objects.all()
@@ -154,7 +150,7 @@ def food(request):
 
 @login_required(login_url='account:login')
 @admin_only
-def delete_food(request, pk=None):
+def delete_food(request, pk=None):  # Admin delete food method
     f = Food.objects.get(pk=pk)
     f.delete()
     return redirect('account:food')
@@ -162,7 +158,7 @@ def delete_food(request, pk=None):
 
 @login_required(login_url='account:login')
 @admin_only
-def add_food(request):
+def add_food(request):    # Admin add food method
     if request.method == 'POST':
         form = FoodForm(request.POST, request.FILES)
         if form.is_valid():
@@ -181,7 +177,7 @@ def add_food(request):
 
 @login_required(login_url='account:login')
 @admin_only
-def update_food(request, pk=None):
+def update_food(request, pk=None):    # Admin update food method
     f = Food.objects.get(id=pk)
     if request.method == 'POST':
         form = FoodForm(request.POST, request.FILES, initial={
@@ -202,7 +198,7 @@ def update_food(request, pk=None):
 
 @login_required(login_url='account:login')
 @admin_only
-def all_orders(request):
+def all_orders(request):   # Admin view order method
     f = Food.objects.all()
     o = Order.objects.all()
     c = Customer.objects.all()

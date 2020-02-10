@@ -6,7 +6,7 @@ import json
 # Create your views here.
 
 
-def api_data(request):
+def api_data(request):  # Get all Food data
     food = Food.objects.all()
     dict_value = {
         "food": list(food.values("name", "price", "description"))
@@ -14,14 +14,14 @@ def api_data(request):
     return JsonResponse(dict_value)
 
 
-def api_specific_data(request, pk=None):
+def api_specific_data(request, pk=None):  # Get specific food data
     food = Food.objects.get(pk=pk)
 
     return JsonResponse({"name": food.name, "price": food.price, "description": food.description})
 
 
 @csrf_exempt
-def api_add_data(request):
+def api_add_data(request):  # Add new food data
     f = Food()
     if request.method == "POST":
         decoded_data = request.body.decode('utf-8')
@@ -37,7 +37,7 @@ def api_add_data(request):
 
 
 @csrf_exempt
-def api_update_data(request, pk=None):
+def api_update_data(request, pk=None):  # update food data
     food = Food.objects.get(pk=pk)
     if request.method == "PUT":
         decoded_data = request.body.decode('utf-8')
@@ -53,7 +53,7 @@ def api_update_data(request, pk=None):
 
 
 @csrf_exempt
-def api_delete_data(request, pk=None):
+def api_delete_data(request, pk=None):  # delete food data
     food = Food.objects.get(pk=pk)
     if request.method == "DELETE":
         food.delete()
@@ -63,7 +63,7 @@ def api_delete_data(request, pk=None):
         return JsonResponse({"name": food.name, "price": food.price, "description": food.description})
 
 
-def api_food_pagination(request, PAGENO):
+def api_food_pagination(request, PAGENO):  # pagination
     SIZE = 5
     skip = SIZE * (PAGENO-1)
     food = Food.objects.all()[skip:PAGENO*SIZE]

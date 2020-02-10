@@ -7,10 +7,13 @@ from . import views
 
 app_name = "customer"
 urlpatterns = [
+    # Profile Url
     path('edit-profile/', views.edit_profile, name="edit_profile"),
+    path('profile/order-history/', views.order_history, name="order_history"),
     path('profile/', views.profile, name="profile"),
+    # Food Url
     path('food/order/', views.list_order, name="list_order"),
     path('food/order/<int:pk>/', views.order, name="order"),
     path('food/order/delete/<int:pk>/', views.delete_food, name="delete_food"),
-    path('profile/order-history/', views.order_history, name="order_history"),
+
 ]

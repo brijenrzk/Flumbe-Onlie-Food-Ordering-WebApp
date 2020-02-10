@@ -36,6 +36,9 @@
       <div class="col-lg-6">
         <div class="login_form_inner">
           <h3>Sign up to get started</h3>
+          {% if error %}
+          <h5 style="color: red;">{{error}}</h5>
+          {% endif %}
           <form
             class="row login_form"
             action="{%url 'account:register'%}"
