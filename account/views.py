@@ -22,11 +22,11 @@ def register(request):
             user = formRegister.save()
             user.set_password(user.password)
             user.save()
-            #us = User.objects.get(pk=user.id)
-            #customer = Customer()
+            # us = User.objects.get(pk=user.id)
+            # customer = Customer()
             profile = formProfile.save(commit=False)
             profile.user = User.objects.get(pk=user.id)
-            #customer.user_id = us
+            # customer.user_id = us
             # print(user.id)
             profile.save()
             username = formRegister.cleaned_data.get('username')
@@ -81,7 +81,15 @@ def home(request):
 @login_required(login_url='account:login')
 @admin_only
 def category(request):
-    return render(request, "account/category.html", {"cat": Category.objects.all()})
+    f = Food.objects.all()
+    o = Order.objects.all()
+    c = Customer.objects.all()
+    cat = Category.objects.all()
+    total_food = f.count()
+    total_order = o.count()
+    total_customer = c.count()
+    total_category = cat.count()
+    return render(request, "account/category.html", {"cat": cat, "total_food": total_food, "total_order": total_order, "total_customer": total_customer, "total_category": total_category})
 
 
 @login_required(login_url='account:login')
@@ -133,7 +141,15 @@ def add_category(request):
 @login_required(login_url='account:login')
 @admin_only
 def food(request):
-    return render(request, "account/foods.html", {"food": Food.objects.all()})
+    f = Food.objects.all()
+    o = Order.objects.all()
+    c = Customer.objects.all()
+    cat = Category.objects.all()
+    total_food = f.count()
+    total_order = o.count()
+    total_customer = c.count()
+    total_category = cat.count()
+    return render(request, "account/foods.html", {"food": f, "total_food": total_food, "total_order": total_order, "total_customer": total_customer, "total_category": total_category})
 
 
 @login_required(login_url='account:login')
@@ -187,4 +203,12 @@ def update_food(request, pk=None):
 @login_required(login_url='account:login')
 @admin_only
 def all_orders(request):
-    return render(request, "account/all-orders.html", {"ord": Order.objects.all()})
+    f = Food.objects.all()
+    o = Order.objects.all()
+    c = Customer.objects.all()
+    cat = Category.objects.all()
+    total_food = f.count()
+    total_order = o.count()
+    total_customer = c.count()
+    total_category = cat.count()
+    return render(request, "account/all-orders.html", {"ord": o, "total_food": total_food, "total_order": total_order, "total_customer": total_customer, "total_category": total_category})

@@ -1,54 +1,150 @@
-{%extends 'base.html' %}{% block content%}
-<h1>Food</h1>
-<hr />
-<a href="{%url 'account:add_food'%}">Add Food</a>
-<hr />
-<h2>List Of Foods</h2>
-{%if food%}
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Description</th>
-      <th>Category</th>
-      <th>Photo</th>
-      <th>Update</th>
-      <th>Delete</th>
-    </tr>
-  </thead>
+{%extends 'base.html' %}
+{% load static %}
+{% block content%}
 
-  <tbody>
-    {%for f in food%}
-    <tr>
-      <td>{{f.name}}</td>
-      <td>{{f.price}}</td>
-      <td>{{f.description}}</td>
-      <td>{{f.cat_id.name}}</td>
-      <td>
-        {%if f.photo%}
-        <img src="{{f.photo.url}}" height="30" width="30" />
-        {%else%} None {%endif%}
-      </td>
-
-      <td><a href="{%url 'account:update_food' f.pk%}">Update</a></td>
-      <td>
-        <form method="POST" action="{% url 'account:delete_food' f.pk%}">
-          {%csrf_token%}<button type="submit" class="btn btn-primary red">
-            Delete
-          </button>
-        </form>
-      </td>
-    </tr>
-    {%endfor%}
-  </tbody>
-</table>
-{%else%}
-<div class="container">
-  <div class="row">
-    <div class="card-title">
-      <h1 class="card-body">No Foods !</h1>
-    </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+  <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 text-center">
+          <div class="section-title">
+            <h1><a href="{%url 'account:home'%}" style="color:black;">DASHBOARD</a></h1>
+          </div>
+        </div>
+      </div>
   </div>
-</div>
-{%endif%} {%endblock%}
+<!-- End Banner Area -->
+
+<section class="features-area section_gap">
+    <div class="container">
+        <div class="row features-inner">
+            <!-- single features -->
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="single-features">
+                    <div class="f-icon">
+                        <h1>{{total_customer}}</h1>
+                    </div>
+                    <h6>Total Customer</h6>
+                </div>
+            </div>
+            <!-- single features -->
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="single-features">
+                    <div class="f-icon">
+                        <h1>{{total_food}}</h1>
+                    </div>
+                    <h6>Total Food</h6>
+                    <p><a href="{%url 'account:food'%}">View Food</a></p>
+                </div>
+            </div>
+            <!-- single features -->
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="single-features">
+                    <div class="f-icon">
+                        <h1>{{total_order}}</h1>
+                    </div>
+                    <h6>Total Order</h6>
+                    <p><a href="{%url 'account:all_orders'%}">View Orders</a></p>
+                </div>
+            </div>
+            <!-- single features -->
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="single-features">
+                    <div class="f-icon">
+                    <h1>{{total_category}}</h1>
+                    </div>
+                    <h6>Total Category</h6>
+                    <p><a href="{%url 'account:category'%}">View Category</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="cart_area">
+  <div class="container">
+      <div class="cart_inner">
+          <div class="table-responsive">
+            <a href="{%url 'account:add_food'%}">Add Food</a>
+              <table class="table">
+                  <thead>
+                      <tr>
+                          <th scope="col">Name</th>
+                          <th scope="col">Price</th>
+                          <th scope="col">Description</th>
+                          <th scope="col">Category</th>
+                          <th scope="col">Photo</th>
+                          <th scope="col">Update</th>
+                          <th scope="col">Delete</th>
+                      </tr>
+                  </thead>
+                  {%if food%}
+                  <tbody>
+                    
+                    {%for f in food%}
+                      <tr>
+                         
+                    </td>
+                    <td>{{f.name}}</td>
+                    <td>{{f.price}}</td>
+                    <td>{{f.description}}</td>
+                    <td>{{f.cat_id.name}}</td>
+                    <td>
+                      {%if f.photo%}
+                      <img src="{{f.photo.url}}" height="30" width="30" />
+                      {%else%} None {%endif%}
+                    </td>
+              
+                    <td><a href="{%url 'account:update_food' f.pk%}">Update</a></td>
+                    <td>
+                      <form method="POST" action="{% url 'account:delete_food' f.pk%}">
+                        {%csrf_token%}<button type="submit" class="btn btn-primary red">
+                          Delete
+                        </button>
+                      </form>
+                    </td>
+              
+                        
+                      </tr>
+                      {%endfor%}
+                    
+                  </tbody>
+                  {%else%}
+<h1>NO FOOD.</h1>
+{%endif%}
+              </table>
+          </div>
+      </div>
+  </div>
+</section>
+{%endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

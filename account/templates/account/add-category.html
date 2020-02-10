@@ -1,8 +1,84 @@
-<body>
-  <form method="POST">
-    {% csrf_token %} {% if error %}
-    <h5 style="color: red;">{{error}}</h5>
-    {% endif %} {{form.as_p}}
-    <button type="submit" class="btn btn-success">Add Category</button>
-  </form>
-</body>
+{%extends 'base.html' %}
+{% load static %}
+{% block content%}
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+  <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 text-center">
+          <div class="section-title">
+            <h1><a href="{%url 'account:home'%}" style="color:black;">DASHBOARD</a></h1>
+          </div>
+        </div>
+      </div>
+  </div>
+<!-- End Banner Area -->
+
+<section class="features-area section_gap">
+    <div class="container">
+        <div class="row features-inner">
+            <!-- single features -->
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="single-features">
+                    <div class="f-icon">
+                        <h1>{{total_customer}}</h1>
+                    </div>
+                    <h6>Total Customer</h6>
+                </div>
+            </div>
+            <!-- single features -->
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="single-features">
+                    <div class="f-icon">
+                        <h1>{{total_food}}</h1>
+                    </div>
+                    <h6>Total Food</h6>
+                    <p><a href="{%url 'account:food'%}">View Food</a></p>
+                </div>
+            </div>
+            <!-- single features -->
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="single-features">
+                    <div class="f-icon">
+                        <h1>{{total_order}}</h1>
+                    </div>
+                    <h6>Total Order</h6>
+                    <p><a href="{%url 'account:all_orders'%}">View Orders</a></p>
+                </div>
+            </div>
+            <!-- single features -->
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="single-features">
+                    <div class="f-icon">
+                    <h1>{{total_category}}</h1>
+                    </div>
+                    <h6>Total Category</h6>
+                    <p><a href="{%url 'account:category'%}">View Category</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="cart_area">
+  <div class="container">
+    <div class="row justify-content-center"></div>
+    <form method="POST">
+      {% csrf_token %} {% if error %}
+      <h5 style="color: red;">{{error}}</h5>
+      {% endif %} {{form.as_p}}
+      <button type="submit" class="btn btn-success">Add Category</button>
+    </form>
+  </div>
+</div>
+</section>
+{%endblock %}
+

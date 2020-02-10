@@ -1,11 +1,68 @@
-<h1>Admin page only</h1>
-<a class="dropdown-item" href="{%url 'account:logout'%}">Logout</a>
+{%extends 'base.html' %} {% load static %} {% block content%}
 
-<h2>Total Customer : {{total_customer}}</h2>
-<h2>Total Food : {{total_food}}</h2>
-<h2>Total Order : {{total_order}}</h2>
-<h2>Total Category : {{total_category}}</h2>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 text-center">
+      <div class="section-title">
+        <h1>
+          <a href="{%url 'account:home'%}" style="color:black;">DASHBOARD</a>
+        </h1>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Banner Area -->
 
-<a href="{%url 'account:category'%}">Category</a>
-<a href="{%url 'account:food'%}">Food</a>
-<a href="{%url 'account:all_orders'%}">All Orders</a>
+<section class="features-area section_gap">
+  <div class="container">
+    <div class="row features-inner">
+      <!-- single features -->
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="single-features">
+          <div class="f-icon">
+            <h1>{{total_customer}}</h1>
+          </div>
+          <h6>Total Customer</h6>
+        </div>
+      </div>
+      <!-- single features -->
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="single-features">
+          <div class="f-icon">
+            <h1>{{total_food}}</h1>
+          </div>
+          <h6>Total Food</h6>
+          <p><a href="{%url 'account:food'%}">View Food</a></p>
+        </div>
+      </div>
+      <!-- single features -->
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="single-features">
+          <div class="f-icon">
+            <h1>{{total_order}}</h1>
+          </div>
+          <h6>Total Order</h6>
+          <p><a href="{%url 'account:all_orders'%}">View Orders</a></p>
+        </div>
+      </div>
+      <!-- single features -->
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="single-features">
+          <div class="f-icon">
+            <h1>{{total_category}}</h1>
+          </div>
+          <h6>Total Category</h6>
+          <p><a href="{%url 'account:category'%}">View Category</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{%endblock %}
