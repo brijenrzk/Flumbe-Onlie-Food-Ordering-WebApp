@@ -1,10 +1,12 @@
-#Furicon_AdC4
+<h1>Furicon_AdC4</h1>
 <hr>
-#Application Name : Flumbe
+<h2>Application Name : Flumbe</h2>
+<br>
 Flumbe is an food ordering app which helps you to order food at your finger tips.
-
+<hr>
 #Contributors:
-1.Brijen Rajak
-2.Prashant Khanal
-3.Ruksha Shakya
-4.Ojesh Khadka
+<ol>
+  <li>Brijen Rajak</li>
+<li>Prashant Khanal</li>
+<li>Ruksha Shakya</li>
+<li>Ojesh Khadka</li>
