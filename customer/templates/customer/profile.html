@@ -1,0 +1,53 @@
+{% extends 'base.html'%} {% block content%}
+<section class="banner-area organic-breadcrumb">
+  <div class="container">
+    <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+      <div class="col-first">
+        <h1>PROFILE</h1>
+        <nav class="d-flex align-items-center">
+          <a href="index.html">{{usr.first_name}} {{usr.last_name}}</a>
+          
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Banner Area -->
+
+<!--================Single Product Area =================-->
+<div class="product_image_area">
+  <div class="container">
+    <div class="row ">
+      <div class="col-lg-8">
+       
+          <div class="single-prd-item" style="width:250px;height:250px;float:right;">
+            {%if usr.customer.photo%}
+            <img class="img-fluid" src="{{usr.customer.photo.url}}" alt="">
+            {%endif%}
+          </div>
+          <div class="single-prd-item">
+            <img class="img-fluid" src="img/category/s-p1.jpg" alt="">
+          </div>
+          <div class="single-prd-item">
+            <img class="img-fluid" src="img/category/s-p1.jpg" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8 offset-lg-1">
+        <div class="s_product_text align-items-center" style="float:right;">
+          <h2>{{usr.first_name}} {{usr.last_name}}</h2>
+          <ul class="list">
+            <li><span>Email:</span> : {{usr.email}}</li>
+            <li><span>Address:</span> : {{usr.customer.address}}</li>
+            <li><span>Contact</span> : {{usr.customer.contact}}</li>
+          </ul>
+          <div class="card_area d-flex align-items-center">
+            <a class="primary-btn" href="{%url 'customer:edit_profile'%}">Edit Profile</a>
+            <a class="gray_btn" href="{%url 'customer:order_history'%}">Order History</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock%}
